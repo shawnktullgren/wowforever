@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Flip-Flop Ledger: WoW Forever Edition</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{--bg:#ece6d3;--ink:#171b30;--mute:#5b5f73;--card:#f6f1e1;--line:#c9c0a4;--red:#a8202a;--gold:#8a5a00;--ok:#1f6b4a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12162a;--ink:#ebe5d2;--mute:#9aa0b8;--card:#1b2038;--line:#343b5e;--red:#e0525c;--gold:#e5b04a;--ok:#5fcf9d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12162a;--ink:#ebe5d2;--mute:#9aa0b8;--card:#1b2038;--line:#343b5e;--red:#e0525c;--gold:#e5b04a;--ok:#5fcf9d;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 "Source Serif 4",Georgia,serif}
+main{max-width:760px;margin:0 auto;padding:28px 18px 80px}
+h1,h2,.slab{font-family:"Alfa Slab One","Rockwell",Georgia,serif;font-weight:400;letter-spacing:.01em}
+h1{font-size:clamp(34px,8vw,58px);line-height:1.02;margin:6px 0 10px}
+h2{font-size:28px;margin:56px 0 6px}
+.sub{color:var(--mute);margin:0 0 22px}
+.case{display:inline-block;border:2px solid var(--red);color:var(--red);padding:2px 10px;transform:rotate(-2deg);font-size:15px;font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0}
+.stat{border-top:3px solid var(--ink);padding-top:8px}
+.stat b{display:block;font-family:"Alfa Slab One",Georgia,serif;font-weight:400;font-size:40px;line-height:1}
+.stat span{font-size:14px;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
+button,.chip{font:inherit;font-size:15px;cursor:pointer;border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:5px 13px;border-radius:99px}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.chip[aria-pressed="true"],.on{background:var(--ink);color:var(--bg)}
+ol.led{list-style:none;margin:10px 0 0;padding:0 0 0 18px;border-left:3px solid var(--ink)}
+.led li{position:relative;margin:0 0 22px;padding-left:6px}
+.led li::before{content:"";position:absolute;left:-27px;top:9px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--ink)}
+.led li.rev::before{background:var(--red);border-color:var(--red)}
+.date{font-size:14px;color:var(--mute)}
+.tag{font-size:13px;border:1px solid var(--line);padding:0 7px;margin-left:6px;border-radius:4px}
+blockquote{margin:3px 0 4px;font-style:italic;font-size:20px}
+.quip{margin:0}
+.stamp{display:inline-block;font-family:"Alfa Slab One",Georgia,serif;color:var(--red);border:2px solid var(--red);padding:0 8px;margin-left:8px;font-size:14px;transform:rotate(-3deg)}
+.co{background:var(--card);border:1px solid var(--line);padding:14px 18px;margin-top:14px}
+.co p{margin:6px 0}
+.who{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.rows{margin-top:12px}
+.sl{display:grid;grid-template-columns:1fr 130px 22px;gap:8px;align-items:center;margin:5px 0;font-size:16px}
+input[type=range]{width:100%;accent-color:var(--red)}
+.bar{display:grid;grid-template-columns:110px 1fr 44px;gap:8px;align-items:center;margin:8px 0;font-size:16px}
+.track{height:20px;background:var(--card);border:1px solid var(--line)}
+.fill{height:100%;background:var(--mute);transition:width .3s}
+.win .fill{background:var(--ok)}
+.win{font-weight:600}
+.note{font-size:14px;color:var(--mute)}
+.pact{background:var(--card);border:2px solid var(--ink);padding:6px 22px 20px;margin-top:14px}
+.pact li{margin:8px 0}
+#sig{margin-top:6px;min-height:28px;color:var(--red);font-weight:600}
+footer{margin-top:50px;font-size:14px;color:var(--mute)}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<span class="case">Case file: #MMO, 9/12 to 10/29</span>
+<h1>The Flip-Flop Ledger</h1>
+<p class="sub">World of Warcraft: Forever edition. Every “final answer,” in order, with commentary nobody asked for.</p>
+
+<div class="stats">
+<div class="stat"><b>5</b><span>classes Zydad has named as the plan (lock, hunter, priest, mage, druid)</span></div>
+<div class="stat"><b>3 hrs</b><span>from “PvE 100%, wasn’t a question” to “we roll PvP alliance”</span></div>
+<div class="stat"><b>1</b><span>pinned message. Binding effect: 0 days</span></div>
+<div class="stat"><b id="days">6</b><span>days until launch (Nov 4)</span></div>
+</div>
+
+<div class="chips" role="group" aria-label="Filter the ledger">
+<button class="chip" aria-pressed="true" data-f="all">Everything</button>
+<button class="chip" aria-pressed="false" data-f="Class">Class</button>
+<button class="chip" aria-pressed="false" data-f="Faction">Faction</button>
+<button class="chip" aria-pressed="false" data-f="Server">Server</button>
+</div>
+<ol class="led" id="led"></ol>
+
+<div class="co">
+<p class="slab" style="font-size:20px;margin:0">The co-defendants</p>
+<p><b>Stinjun</b>, 9/22: “someone else needs to decide for me lol.” And on 10/26 he admitted he’s also to blame for the circles. He reopened it with RP-PvP on 10/22.</p>
+<p><b>Milk</b>, 10/6: noted that the group changes its mind every day trying to play Alliance. He then asked for a pin on 10/26 so everyone could stop.</p>
+<p><b>Korwon</b> pinned the “final answer” and has been the bailiff ever since.</p>
+</div>
+
+<h2>Exhibit B: settle it with math</h2>
+<p class="sub">Set how much each thing matters, or load someone’s priorities as I read them from the chat. Scores are my reading of what they argued, so fight me on them.</p>
+<div class="who" id="who"></div>
+<div class="rows" id="sl"></div>
+<div id="out" style="margin-top:16px"></div>
+
+<h2>Exhibit C: The Pact</h2>
+<div class="pact">
+<ol>
+<li>The pick is whatever wins above, and a pinned message is binding. Pins are not editable by the pinned person.</li>
+<li>First characters are Horde PvE. Alliance, RP-PvP and the other classes are for alts, which this game explicitly allows.</li>
+<li>The vote reopens only if: Consumed by Hatred changes servers, Blizzard ships real anti-camping protection, or someone posts verified RP-PvP population numbers.</li>
+<li>Every other video, patch note and “what if” waits until two weeks after launch.</li>
+</ol>
+<button id="sign">Sign the pact</button>
+<div id="sig" aria-live="polite"></div>
+</div>
+
+<footer>Quotes are from the #MMO channel export, 9/12/26 to 10/29/26. Roasted with love.</footer>
+</main>
+<script>
+var E=[
+["9/16","Class","“I’m going either Hunter or lock I think”","Day zero. Already two classes, neither of them priest.",0],
+["9/20","Class","“Forsure lock is #1 choice right now”","Warlock has the throne.",0],
+["9/21","Server","“We wouldn’t go pve anyways so you are good”","Opening position: PvP. Remember this one.",0],
+["9/30","Class","“Just go ahead and cancel lock off my list”","The warlock reign lasted ten days. No funeral.",1],
+["10/1","Class","“It’s priest if I had to choose today”","Today. Not tomorrow.",0],
+["10/1","Class","“Will 1000% only have 1 character”","Same day: “I’ve got like 3 priests all level like 7-10.”",1],
+["10/6","Server","“PvE server it is”","Said after Stinjun got ganked. Sympathy vote.",0],
+["10/7","Server","“we already going pve 100% wasn’t a question”","Nine PM: “There’s only one solution… We roll PvP alliance.”",1],
+["10/7","Faction","“Made a whole horde board and landed on a potential alliance pick”","He spun a wheel, and then argued with the wheel.",1],
+["10/8","Faction","“Alliance it is”","Horde remained the group’s plan. Nobody was consulted.",1],
+["10/15","Class","“I’m going warlock”… “Actually… priest”… “Ehh.. maybe mage”… “…druid”","All inside a minute. A new personal record for class changes per minute.",1],
+["10/15","Class","“Priest is locked in. Final answer”","Pinned by Korwon at 6:08 PM. This is the one that was supposed to hold.",0],
+["10/15","Server","“And thats exactly why we aint oging pvp haha”","This is the 15th, and it matters for the next entry.",0],
+["10/19","Server","“I think we roll PvP server…”","Four days later. The ink on the PvE vote was still wet.",1],
+["10/20","Class","“Hunter is leading right now”","Five days after the pin. The pin is now decorative.",1],
+["10/22","Class","“Think priest is still top”","Priest returns. Resurrection quest not required.",1],
+["10/26","Faction","“I still stand by my statement that horde sucks”","An hour later: “Alliance PvP it is. I agree.” The group had just agreed on normal Horde.",1],
+["10/27","Class","“Zy Dad and Zydad Voidrot, will choose at launch”","Cannot commit to a name. Launch is seven days out.",0],
+["10/29","Server","“So if right now they announced… Yall would play pvp server?”","Day minus six. He found a loophole and he’s using it.",1]];
+var led=document.getElementById("led");
+E.forEach(function(e){var li=document.createElement("li");li.dataset.t=e[1];if(e[4])li.className="rev";
+li.innerHTML='<span class="date">'+e[0]+'<span class="tag">'+e[1]+'</span>'+(e[4]?'<span class="stamp">REVERSED</span>':'')+'</span><blockquote>'+e[2]+'</blockquote><p class="quip">'+e[3]+'</p>';led.appendChild(li)});
+document.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){
+document.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed",x===c)});
+var f=c.dataset.f;led.querySelectorAll("li").forEach(function(li){li.hidden=!(f==="all"||li.dataset.t===f)})}});
+var d=Math.ceil((new Date(2026,10,4)-new Date())/864e5);document.getElementById("days").textContent=Math.max(0,d);
+
+var O=["Horde PvE","Alliance PvE","Horde PvP","Alliance PvP"];
+var C=[["Finding groups at 60",[4,5,3,3],"PvE is bigger; beta data had Alliance PvE emptier of Horde"],
+["Safe leveling",[5,5,1,1],"Gankers"],
+["Stay with Consumed by Hatred",[5,0,0,0],"They’re Horde PvE"],
+["Keep race picks",[5,0,5,0],"Undead paladin and rogue, Tauren shaman"],
+["World PvP danger",[2,2,5,5],"PvE can still flag up"],
+["Play both factions",[4,4,1,1],"PvE allows both"]];
+var P={"Stinjun":[4,3,4,4,2,5],"Milk":[4,5,4,4,1,3],"Korwon":[3,3,3,4,3,3],"Zydad (this week)":[3,2,1,1,5,1]};
+var W=[3,3,3,3,3,3];
+var sl=document.getElementById("sl"),who=document.getElementById("who");
+C.forEach(function(c,i){var r=document.createElement("div");r.className="sl";
+r.innerHTML='<label for="w'+i+'">'+c[0]+'</label><input type="range" id="w'+i+'" min="0" max="5" value="3"><span id="v'+i+'">3</span>';sl.appendChild(r);
+r.querySelector("input").oninput=function(){W[i]=+this.value;draw()}});
+function setW(a){W=a.slice();a.forEach(function(v,i){document.getElementById("w"+i).value=v});draw()}
+Object.keys(P).forEach(function(k){var b=document.createElement("button");b.textContent=k;b.onclick=function(){setW(P[k])};who.appendChild(b)});
+var z=document.createElement("button");z.textContent="Zydad (re-rolls on click)";z.onclick=function(){setW(C.map(function(){return Math.floor(Math.random()*6)}))};who.appendChild(z);
+function draw(){var tot=W.reduce(function(a,b){return a+b},0)||1;
+var s=O.map(function(o,j){return C.reduce(function(a,c,i){return a+W[i]*c[1][j]},0)/(tot*5)*100});
+var m=Math.max.apply(null,s);
+W.forEach(function(v,i){document.getElementById("v"+i).textContent=v});
+document.getElementById("out").innerHTML=O.map(function(o,j){var w=s[j]===m;
+return '<div class="bar'+(w?' win':'')+'"><span>'+o+'</span><div class="track"><div class="fill" style="width:'+s[j].toFixed(0)+'%"></div></div><span>'+s[j].toFixed(0)+'</span></div>'}).join("")}
+setW(W);
+document.getElementById("sign").onclick=function(){document.getElementById("sig").textContent="Signed. Binding as of this click, except for Zydad, whose signature is under review until Thursday."};
+</script>
+</body>
+</html>
